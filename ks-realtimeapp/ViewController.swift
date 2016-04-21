@@ -27,10 +27,16 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        firebase.setValue("This is a very long label that will take more than one line of the iPhone!")
+        //firebase.setValue("This is a very long label that will take more than one line of the iPhone!")
+        
+        firebase.childByAppendingPath("users").childByAppendingPath("name").childByAppendingPath("firstName").setValue("Khoon Seng")
+        firebase.childByAppendingPath("users").childByAppendingPath("name").childByAppendingPath("lastName").setValue("Lim")
+        firebase.childByAppendingPath("users").childByAppendingPath("age").setValue("29")
+        firebase.childByAppendingPath("users").childByAppendingPath("gender").setValue("Male")
+        firebase.childByAppendingPath("users").childByAppendingPath("isOnline").setValue("true")
         
         firebase.observeEventType(FEventType.Value) { (snapshot:FDataSnapshot!) -> Void in
-            //print(snapshot.value)
+            print(snapshot.value)
             self.textLabel.text = snapshot.value as? String
             
             //self.firebase.setValue("Computer says no!")
