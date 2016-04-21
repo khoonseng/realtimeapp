@@ -22,7 +22,7 @@ class ViewController: UIViewController {
         
         
         firebase.childByAppendingPath("user").childByAppendingPath("name").setValue(textField.text)
-        firebase.childByAppendingPath("user").childByAppendingPath("isOnline").setValue("true")
+        firebase.childByAppendingPath("user").childByAppendingPath("isOnline").setValue(true)
         
         textField.text = ""
         
@@ -49,6 +49,14 @@ class ViewController: UIViewController {
             if let snapshot = snapshot.value["user"] {
                 if let name = snapshot?.objectForKey("name") as? String {
                     self.textLabel.text = name
+                }
+                if let isOnline = snapshot?.objectForKey("isOnline") as? Bool {
+                    print(isOnline)
+                    if isOnline {
+                        self.view.backgroundColor = UIColor.greenColor()
+                    } else {
+                        self.view.backgroundColor = UIColor.whiteColor()
+                    }
                 }
             }
             
