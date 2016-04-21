@@ -24,16 +24,34 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter some text" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="G0L-jK-0rf">
+                                <rect key="frame" x="20" y="128" width="374" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gHA-bW-KB1">
+                                <rect key="frame" x="117" y="206" width="181" height="30"/>
+                                <state key="normal" title="Send Message to Firebase"/>
+                                <connections>
+                                    <action selector="sendMessageButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8cN-vI-jUQ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="G0L-jK-0rf" firstAttribute="top" secondItem="A72-4D-KXb" secondAttribute="bottom" constant="79" id="RUP-Mz-gMW"/>
+                            <constraint firstItem="G0L-jK-0rf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Tcl-sb-ra5"/>
+                            <constraint firstItem="gHA-bW-KB1" firstAttribute="centerX" secondItem="G0L-jK-0rf" secondAttribute="centerX" id="Wmb-zA-v43"/>
                             <constraint firstItem="A72-4D-KXb" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Wr1-NO-ROH"/>
+                            <constraint firstItem="G0L-jK-0rf" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="c6m-Ru-W5n"/>
+                            <constraint firstItem="gHA-bW-KB1" firstAttribute="top" secondItem="G0L-jK-0rf" secondAttribute="bottom" constant="48" id="c9F-QO-mub"/>
                             <constraint firstItem="A72-4D-KXb" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="frB-9g-b9y"/>
                             <constraint firstItem="A72-4D-KXb" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="m6p-ks-jmH"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
+                        <outlet property="textField" destination="G0L-jK-0rf" id="bdm-Lv-Mui"/>
                         <outlet property="textLabel" destination="A72-4D-KXb" id="bDE-9y-fsA"/>
                     </connections>
                 </viewController>
