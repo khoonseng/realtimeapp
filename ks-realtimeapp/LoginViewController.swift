@@ -28,7 +28,7 @@ class LoginViewController: UIViewController {
                     self.displayMessage(error)
                 } else {
                     print("new user created")
-                    self.authenticateUser()
+                    self.createUsername()
                 }
             }
         }
@@ -64,6 +64,25 @@ class LoginViewController: UIViewController {
         let action = UIAlertAction(title: "Ok", style: .Default, handler: nil)
         alert.addAction(action)
         self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func createUsername() {
+        var usernameTextField: UITextField?
+        let title = "Enter a username"
+        let message = "Please enter a username for your new account:"
+        let usernameEntry = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        let action = UIAlertAction(title: "Ok", style: .Default) { (UIAlertAction) in
+            if let user = usernameTextField?.text {
+                print(user)
+                self.authenticateUser()
+            }
+        }
+        
+        usernameEntry.addAction(action)
+        usernameEntry.addTextFieldWithConfigurationHandler { (username:UITextField) in
+            usernameTextField = username
+        }
+        self.presentViewController(usernameEntry, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
