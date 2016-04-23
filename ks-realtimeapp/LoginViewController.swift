@@ -11,6 +11,8 @@ import UIKit
 class LoginViewController: UIViewController {
 
     var firebase = Firebase(url: "https://ks-realtimeapp.firebaseio.com")
+    var username = String()
+    var newUser = false
     
     @IBOutlet var email: UITextField!
     @IBOutlet var password: UITextField!
@@ -43,6 +45,12 @@ class LoginViewController: UIViewController {
                     self.displayMessage(error)
                 } else {
                     print("user logged " + authData.description)
+                    let uid = authData.uid
+                    if self.newUser {
+                        self.firebase.childByAppendingPath("users").childByAppendingPath(uid).setValue(["isOnline":true, "name":self.username])
+                    } else {
+                        self.firebase.childByAppendingPath("users").childByAppendingPath(uid).updateChildValues(["isOnline":true])
+                    }
                     self.performSegueWithIdentifier("mainSegue", sender: self)
                 }
             }
@@ -74,6 +82,8 @@ class LoginViewController: UIViewController {
         let action = UIAlertAction(title: "Ok", style: .Default) { (UIAlertAction) in
             if let user = usernameTextField?.text {
                 print(user)
+                self.newUser = true
+                self.username = user
                 self.authenticateUser()
             }
         }
