@@ -21,6 +21,22 @@ class MessageTableViewController: UITableViewController {
     
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        //send messages between 2 view controllers using completion block and prepareForSegue
+        if let messageController = segue.destinationViewController as? MessageViewController {
+            messageController.onMessageAvailable = {[weak self]
+                (data) in
+                if let weakSelf = self {
+                    weakSelf.receiveMessageToSendToFirebase(data)
+                }
+            }
+        }
+    }
+    
+    func receiveMessageToSendToFirebase(data:String) {
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

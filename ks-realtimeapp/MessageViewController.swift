@@ -10,10 +10,21 @@ import UIKit
 
 class MessageViewController: UIViewController {
 
+    @IBOutlet var messageField: UITextField!
+    //completion block
+    var onMessageAvailable: ((data:String) ->())?
+    
     @IBAction func sendMessage(sender: AnyObject) {
+        if let text = messageField.text {
+            onMessageAvailable!(data:text)
+        }
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
+    
     @IBAction func cancelMessage(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

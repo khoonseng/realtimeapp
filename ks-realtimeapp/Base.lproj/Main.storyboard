@@ -140,16 +140,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Sv8-tt-wxD">
-                                <rect key="frame" x="45" y="120" width="324" height="60"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Sv8-tt-wxD">
+                                <rect key="frame" x="45" y="45" width="324" height="141"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="54U-df-KRx">
-                                        <rect key="frame" x="0.0" y="0.0" width="324" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="324" height="111"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="DNP-4l-HL4">
-                                        <rect key="frame" x="0.0" y="30" width="324" height="30"/>
+                                        <rect key="frame" x="0.0" y="111" width="324" height="30"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Xb-SR-nfU">
                                                 <rect key="frame" x="0.0" y="0.0" width="162" height="30"/>
@@ -180,10 +180,14 @@
                         <constraints>
                             <constraint firstItem="Sv8-tt-wxD" firstAttribute="top" secondItem="xdN-Ar-8Ec" secondAttribute="bottom" constant="25" id="IhQ-MI-U0N"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Sv8-tt-wxD" secondAttribute="trailing" constant="25" id="fOr-BN-97w"/>
+                            <constraint firstItem="NIN-gY-spP" firstAttribute="top" secondItem="Sv8-tt-wxD" secondAttribute="bottom" constant="550" id="vTX-jm-tIu"/>
                             <constraint firstItem="Sv8-tt-wxD" firstAttribute="leading" secondItem="DMl-pX-Npd" secondAttribute="leadingMargin" constant="25" id="vXB-K8-hDK"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <connections>
+                        <outlet property="messageField" destination="54U-df-KRx" id="VBV-Ei-5w8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r1i-Fo-Khb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
