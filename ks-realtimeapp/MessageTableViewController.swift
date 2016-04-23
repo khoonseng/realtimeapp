@@ -34,7 +34,8 @@ class MessageTableViewController: UITableViewController {
     }
     
     func receiveMessageToSendToFirebase(data:String) {
-        
+        let details = ["message":data, "sender": firebase.authData.uid]
+        firebase.childByAppendingPath("posts").childByAutoId().setValue(details)
     }
     
     override func viewDidLoad() {
