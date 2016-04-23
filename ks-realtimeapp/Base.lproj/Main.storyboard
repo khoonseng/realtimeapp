@@ -86,10 +86,10 @@
             </objects>
             <point key="canvasLocation" x="418" y="66"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Message Table View Controller-->
         <scene sceneID="arW-ld-VsI">
             <objects>
-                <tableViewController id="QXJ-i6-BBM" sceneMemberID="viewController">
+                <tableViewController id="QXJ-i6-BBM" customClass="MessageTableViewController" customModule="ks_realtimeapp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Md9-6I-Vy1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -109,7 +109,19 @@
                             <outlet property="delegate" destination="QXJ-i6-BBM" id="t9D-Un-PBh"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="eZe-GE-DPD"/>
+                    <navigationItem key="navigationItem" id="eZe-GE-DPD">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="iaw-BR-Ujt">
+                            <connections>
+                                <action selector="logOut:" destination="QXJ-i6-BBM" id="2PS-m0-dbd"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="x3X-hC-laf">
+                            <connections>
+                                <action selector="addMessage:" destination="QXJ-i6-BBM" id="YEF-qv-7hf"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r8z-wv-TxU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
