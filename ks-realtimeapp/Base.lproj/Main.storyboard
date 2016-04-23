@@ -118,6 +118,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="x3X-hC-laf">
                             <connections>
                                 <action selector="addMessage:" destination="QXJ-i6-BBM" id="YEF-qv-7hf"/>
+                                <segue destination="ltU-bm-YN8" kind="presentation" id="wew-gf-ZUV"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -126,6 +127,67 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r8z-wv-TxU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1657" y="66"/>
+        </scene>
+        <!--Message View Controller-->
+        <scene sceneID="xzl-ZS-uVS">
+            <objects>
+                <viewController id="ltU-bm-YN8" customClass="MessageViewController" customModule="ks_realtimeapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xdN-Ar-8Ec"/>
+                        <viewControllerLayoutGuide type="bottom" id="NIN-gY-spP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="DMl-pX-Npd">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Sv8-tt-wxD">
+                                <rect key="frame" x="45" y="120" width="324" height="60"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="54U-df-KRx">
+                                        <rect key="frame" x="0.0" y="0.0" width="324" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="DNP-4l-HL4">
+                                        <rect key="frame" x="0.0" y="30" width="324" height="30"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Xb-SR-nfU">
+                                                <rect key="frame" x="0.0" y="0.0" width="162" height="30"/>
+                                                <state key="normal" title="Send"/>
+                                                <connections>
+                                                    <action selector="sendMessage:" destination="ltU-bm-YN8" eventType="touchUpInside" id="j2u-c8-Gsp"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wJx-tK-GpE">
+                                                <rect key="frame" x="162" y="0.0" width="162" height="30"/>
+                                                <state key="normal" title="Cancel"/>
+                                                <connections>
+                                                    <action selector="cancelMessage:" destination="ltU-bm-YN8" eventType="touchUpInside" id="ZCp-7k-nhv"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="54U-df-KRx" firstAttribute="leading" secondItem="Sv8-tt-wxD" secondAttribute="leading" id="0AC-ny-bgp"/>
+                                    <constraint firstAttribute="trailing" secondItem="54U-df-KRx" secondAttribute="trailing" id="Jib-D4-oeE"/>
+                                    <constraint firstItem="54U-df-KRx" firstAttribute="top" secondItem="Sv8-tt-wxD" secondAttribute="top" id="VAG-4d-kh6"/>
+                                    <constraint firstItem="DNP-4l-HL4" firstAttribute="top" secondItem="54U-df-KRx" secondAttribute="bottom" id="fxw-eD-DhV"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Sv8-tt-wxD" firstAttribute="top" secondItem="xdN-Ar-8Ec" secondAttribute="bottom" constant="100" id="IhQ-MI-U0N"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Sv8-tt-wxD" secondAttribute="trailing" constant="25" id="fOr-BN-97w"/>
+                            <constraint firstItem="Sv8-tt-wxD" firstAttribute="leading" secondItem="DMl-pX-Npd" secondAttribute="leadingMargin" constant="25" id="vXB-K8-hDK"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="r1i-Fo-Khb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2216" y="66"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="h5d-qa-35x">
