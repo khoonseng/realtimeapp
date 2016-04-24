@@ -8,17 +8,24 @@
 
 import UIKit
 
+struct User {
+    let uid: String?
+    let name: String?
+}
+
+/*
+//this static class is removed. will change to dynamic class based on firebase
 struct Message {
     let message: String?
     let uid: String?
-}
+}*/
 
 
 class MessageTableViewController: UITableViewController {
 
     var firebase = Firebase(url: "https://ks-realtimeapp.firebaseio.com")
     var childAddedHandler = FirebaseHandle()
-    var listOfMessages = Array<Message>()
+    var listOfMessages = NSMutableDictionary()
     
     @IBAction func logOut(sender: AnyObject) {
         firebase.childByAppendingPath("users").childByAppendingPath(self.firebase.authData.uid).updateChildValues(["isOnline":false])
@@ -56,18 +63,35 @@ class MessageTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        childAddedHandler = firebase.observeEventType(.ChildAdded, withBlock: { (snapshot:FDataSnapshot!) in
-            if let newMessages = snapshot.value as? NSDictionary {
-                print(newMessages)
-                for newMessage in newMessages {
-                    let message = newMessage.value
-                    let appMessage = Message(message: message["message"] as? String, uid: message["sender"] as? String)
-                    self.listOfMessages.append(appMessage)
-                }
-                print (self.listOfMessages)
-            }
+        childAddedHandler = firebase.childByAppendingPath("posts").observeEventType(.Value, withBlock: { (snapshot:FDataSnapshot!) in
+            self.firebaseUpdate(snapshot)
         })
         
+        childAddedHandler = firebase.observeEventType(.ChildChanged, withBlock: { (snapshot:FDataSnapshot!) in
+            self.firebaseUpdate(snapshot)
+        })
+        
+    }
+    
+    func firebaseUpdate(snapshot: FDataSnapshot) {
+        if let newMessages = snapshot.value as? NSDictionary {
+            print(newMessages)
+            for newMessage in newMessages {
+                let key = newMessage.key as! String
+                let messageExist = (self.listOfMessages[key] != nil)
+                if !messageExist {
+                    self.listOfMessages.setValue(newMessage.value, forKey: key)
+                }
+                
+                /* removed as this is using static array.
+                 let message = newMessage.value
+                 let appMessage = Message(message: message["message"] as? String, uid: message["sender"] as? String)
+                 self.listOfMessages.append(appMessage)*/
+            }
+        }
+        dispatch_async(dispatch_get_main_queue()) { [unowned self] in // to avoid memory leak
+            self.tableView.reloadData()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -79,23 +103,27 @@ class MessageTableViewController: UITableViewController {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return listOfMessages.count
     }
 
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
 
-        // Configure the cell...
-
+        //convert NSDictionary keys to array
+        let arrayOfKeys = listOfMessages.allKeys
+        let key = arrayOfKeys[indexPath.row]
+        let value = listOfMessages[key as! String]
+        cell.textLabel?.text = (value as! NSDictionary)["message"] as? String
+        
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.
