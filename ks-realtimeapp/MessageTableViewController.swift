@@ -8,9 +8,18 @@
 
 import UIKit
 
+struct Message {
+    let message: String?
+    let uid: String?
+}
+
+
 class MessageTableViewController: UITableViewController {
 
     var firebase = Firebase(url: "https://ks-realtimeapp.firebaseio.com")
+    var childAddedHandler = FirebaseHandle()
+    var listOfMessages = Array<Message>()
+    
     @IBAction func logOut(sender: AnyObject) {
         firebase.childByAppendingPath("users").childByAppendingPath(self.firebase.authData.uid).updateChildValues(["isOnline":false])
         firebase.unauth()
@@ -46,6 +55,19 @@ class MessageTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        childAddedHandler = firebase.observeEventType(.ChildAdded, withBlock: { (snapshot:FDataSnapshot!) in
+            if let newMessages = snapshot.value as? NSDictionary {
+                print(newMessages)
+                for newMessage in newMessages {
+                    let message = newMessage.value
+                    let appMessage = Message(message: message["message"] as? String, uid: message["sender"] as? String)
+                    self.listOfMessages.append(appMessage)
+                }
+                print (self.listOfMessages)
+            }
+        })
+        
     }
 
     override func didReceiveMemoryWarning() {
