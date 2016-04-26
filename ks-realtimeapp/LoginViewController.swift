@@ -51,7 +51,7 @@ class LoginViewController: UIViewController {
                     } else {
                         self.firebase.childByAppendingPath("users").childByAppendingPath(uid).updateChildValues(["isOnline":true])
                     }
-                    self.performSegueWithIdentifier("mainSegue", sender: self)
+                    self.performSegueWithIdentifier("segueJSQ", sender: self)
                 }
             }
         }
@@ -106,7 +106,7 @@ class LoginViewController: UIViewController {
         super.viewDidAppear(animated)
         //check if user is logged in
         if firebase.authData != nil {
-            self.performSegueWithIdentifier("mainSegue", sender: self)
+            self.performSegueWithIdentifier("segueJSQ", sender: self)
         }
     }
     

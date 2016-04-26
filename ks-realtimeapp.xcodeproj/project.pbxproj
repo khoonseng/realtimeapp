@@ -10,6 +10,7 @@
 		4E2F52161CCA5B0E00662F1E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2F52151CCA5B0E00662F1E /* LoginViewController.swift */; };
 		4E59B97B1CCB1144002D035C /* MessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E59B97A1CCB1144002D035C /* MessageTableViewController.swift */; };
 		4E59B97D1CCB231E002D035C /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E59B97C1CCB231E002D035C /* MessageViewController.swift */; };
+		4EADA1D01CCFBD55004ED8DA /* JSQViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EADA1CF1CCFBD55004ED8DA /* JSQViewController.swift */; };
 		4EF8D9411CC29617004AB5AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF8D9401CC29617004AB5AF /* AppDelegate.swift */; };
 		4EF8D9461CC29617004AB5AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EF8D9441CC29617004AB5AF /* Main.storyboard */; };
 		4EF8D9481CC29617004AB5AF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EF8D9471CC29617004AB5AF /* Assets.xcassets */; };
@@ -42,6 +43,7 @@
 		4E2F52151CCA5B0E00662F1E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		4E59B97A1CCB1144002D035C /* MessageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewController.swift; sourceTree = "<group>"; };
 		4E59B97C1CCB231E002D035C /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
+		4EADA1CF1CCFBD55004ED8DA /* JSQViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSQViewController.swift; sourceTree = "<group>"; };
 		4EF8D93D1CC29617004AB5AF /* ks-realtimeapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ks-realtimeapp.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EF8D9401CC29617004AB5AF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4EF8D9451CC29617004AB5AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 			children = (
 				4EF8D9401CC29617004AB5AF /* AppDelegate.swift */,
 				4EF8D9441CC29617004AB5AF /* Main.storyboard */,
+				4EADA1CF1CCFBD55004ED8DA /* JSQViewController.swift */,
 				4E59B97C1CCB231E002D035C /* MessageViewController.swift */,
 				4E59B97A1CCB1144002D035C /* MessageTableViewController.swift */,
 				4E2F52151CCA5B0E00662F1E /* LoginViewController.swift */,
@@ -343,6 +346,7 @@
 				4E59B97B1CCB1144002D035C /* MessageTableViewController.swift in Sources */,
 				4E59B97D1CCB231E002D035C /* MessageViewController.swift in Sources */,
 				4EF8D9411CC29617004AB5AF /* AppDelegate.swift in Sources */,
+				4EADA1D01CCFBD55004ED8DA /* JSQViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

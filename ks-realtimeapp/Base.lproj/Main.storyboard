@@ -80,11 +80,30 @@
                         <outlet property="email" destination="df6-Zd-WF7" id="qMx-DT-g3K"/>
                         <outlet property="password" destination="Zx4-Mc-nO1" id="BzZ-fd-cRv"/>
                         <segue destination="DQ0-3S-oRD" kind="show" identifier="mainSegue" id="zRX-gP-87B"/>
+                        <segue destination="Fus-kD-EhW" kind="show" identifier="segueJSQ" id="3vu-mG-zip"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UHT-Pd-rr4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="418" y="66"/>
+        </scene>
+        <!--Messages View Controller-->
+        <scene sceneID="UTl-Gh-sF8">
+            <objects>
+                <viewController id="Fus-kD-EhW" customClass="JSQMessagesViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="boJ-ts-Mhu"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ow5-Lk-oCh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="APJ-YX-rMn">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yR9-CI-cbL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="418" y="954"/>
         </scene>
         <!--Message Table View Controller-->
         <scene sceneID="arW-ld-VsI">
