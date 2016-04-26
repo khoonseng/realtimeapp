@@ -87,10 +87,10 @@
             </objects>
             <point key="canvasLocation" x="418" y="66"/>
         </scene>
-        <!--Messages View Controller-->
+        <!--View Controller-->
         <scene sceneID="UTl-Gh-sF8">
             <objects>
-                <viewController id="Fus-kD-EhW" customClass="JSQMessagesViewController" sceneMemberID="viewController">
+                <viewController id="Fus-kD-EhW" customClass="JSQViewController" customModule="ks_realtimeapp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="boJ-ts-Mhu"/>
                         <viewControllerLayoutGuide type="bottom" id="Ow5-Lk-oCh"/>
@@ -103,7 +103,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yR9-CI-cbL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="418" y="954"/>
+            <point key="canvasLocation" x="418" y="952"/>
         </scene>
         <!--Message Table View Controller-->
         <scene sceneID="arW-ld-VsI">
