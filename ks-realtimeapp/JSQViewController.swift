@@ -15,7 +15,7 @@ class JSQViewController: JSQMessagesViewController {
     var avatars = [String: JSQMessagesAvatarImage]()
     var messages = [JSQMessage]()
     let firebase = Firebase(url: "https://ks-realtimeapp.firebaseio.com/JSQNode")
-    
+    var keys = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +32,21 @@ class JSQViewController: JSQMessagesViewController {
         outgoingBubble = bubbleFactory.outgoingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleLightGrayColor())
         
         createAvatar(senderId, senderDisplayName: senderDisplayName, color: UIColor.lightGrayColor())
+        
+        firebase.queryLimitedToLast(50).observeSingleEventOfType(FEventType.Value) { (snapshot:FDataSnapshot!) in
+            //print(snapshot)
+            
+            let values = snapshot.value
+            for value in values as! NSDictionary {
+                self.keys.append(value.key as! String)
+                if let message = value.value as? NSDictionary {
+                    let date = message["date"] as! NSTimeInterval
+                    let jsqMessage = JSQMessage(senderId: message["senderId"] as! String, senderDisplayName: message["senderDisplayName"] as! String, date: NSDate(timeIntervalSince1970: date), text: message["message"] as! String)
+                    self.messages.append(jsqMessage)
+                }
+            }
+            self.collectionView.reloadData()
+        }
     }
 
     override func didReceiveMemoryWarning() {
