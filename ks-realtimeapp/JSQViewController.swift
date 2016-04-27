@@ -14,6 +14,7 @@ class JSQViewController: JSQMessagesViewController {
     var outgoingBubble: JSQMessagesBubbleImage!
     var avatars = [String: JSQMessagesAvatarImage]()
     var messages = [JSQMessage]()
+    let firebase = Firebase(url: "https://ks-realtimeapp.firebaseio.com/JSQNode")
     
     
     override func viewDidLoad() {
@@ -40,6 +41,7 @@ class JSQViewController: JSQMessagesViewController {
     
     override func didPressSendButton(button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: NSDate!) {
         let message = JSQMessage(senderId: senderId, displayName: senderDisplayName, text: text)
+        firebase.childByAutoId().setValue(["message":text, "senderId": senderId, "senderDisplayName": senderDisplayName, "date":date.timeIntervalSince1970, "messageType":"txt"])
         messages.append(message)
         JSQSystemSoundPlayer.jsq_playMessageSentSound()
         finishSendingMessage()
