@@ -13,6 +13,8 @@ class JSQViewController: JSQMessagesViewController {
     var incomingBubble: JSQMessagesBubbleImage!
     var outgoingBubble: JSQMessagesBubbleImage!
     var avatars = [String: JSQMessagesAvatarImage]()
+    var messages = [JSQMessage()]
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,5 +44,48 @@ class JSQViewController: JSQMessagesViewController {
             let avatar = JSQMessagesAvatarImageFactory.avatarImageWithUserInitials(initials, backgroundColor: color, textColor: UIColor.blackColor(), font: UIFont.systemFontOfSize(14), diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
             avatars[senderID] = avatar
         }
+    }
+    
+    //Override CollectionView Delegates
+    override func collectionView(collectionView: JSQMessagesCollectionView!, messageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageData! {
+        return messages[indexPath.row]
+    }
+    
+    override func collectionView(collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageBubbleImageDataSource! {
+        let message = messages[indexPath.row]
+        if message.senderId == senderId {
+            return outgoingBubble
+        }
+        return incomingBubble
+    }
+    
+    override func collectionView(collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageAvatarImageDataSource! {
+        let message = messages[indexPath.row]
+        return avatars[message.senderId]
+    }
+    
+    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath) as! JSQMessagesCollectionViewCell
+        let message = messages[indexPath.row]
+        if message.senderId == senderId {
+            cell.textView.textColor = UIColor.blackColor()
+        } else {
+            cell.textView.textColor = UIColor.whiteColor()
+        }
+        cell.textView.linkTextAttributes = [NSForegroundColorAttributeName:(cell.textView.textColor)!]
+        return cell
+    }
+    
+    override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
+        let message = messages[indexPath.row]
+        if indexPath.row <= 1 {
+            return NSAttributedString(string: message.senderDisplayName)
+        }
+        
+        return nil
+    }
+    
+    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return messages.count
     }
 }
