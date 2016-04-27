@@ -47,6 +47,21 @@ class JSQViewController: JSQMessagesViewController {
             }
             self.collectionView.reloadData()
         }
+        
+        firebase.queryLimitedToLast(1).observeEventType(FEventType.ChildAdded) { (snapshot:FDataSnapshot!) in
+            //print(snapshot)
+            self.keys.append(snapshot.key)
+            if let message = snapshot.value as? NSDictionary {
+                let date = message["date"] as! NSTimeInterval
+                let senderId = message["senderId"] as! String
+                let jsqMessage = JSQMessage(senderId: senderId, senderDisplayName: message["senderDisplayName"] as! String, date: NSDate(timeIntervalSince1970: date), text: message["message"] as! String)
+                self.messages.append(jsqMessage)
+                if senderId != self.senderId {
+                    JSQSystemSoundPlayer.jsq_playMessageReceivedSound()
+                }
+            }
+            self.finishReceivingMessageAnimated(true)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,9 +70,9 @@ class JSQViewController: JSQMessagesViewController {
     }
     
     override func didPressSendButton(button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: NSDate!) {
-        let message = JSQMessage(senderId: senderId, displayName: senderDisplayName, text: text)
+        //let message = JSQMessage(senderId: senderId, displayName: senderDisplayName, text: text)
         firebase.childByAutoId().setValue(["message":text, "senderId": senderId, "senderDisplayName": senderDisplayName, "date":date.timeIntervalSince1970, "messageType":"txt"])
-        messages.append(message)
+        //messages.append(message)
         JSQSystemSoundPlayer.jsq_playMessageSentSound()
         finishSendingMessage()
     }
