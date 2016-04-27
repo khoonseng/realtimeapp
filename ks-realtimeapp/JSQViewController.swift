@@ -13,7 +13,7 @@ class JSQViewController: JSQMessagesViewController {
     var incomingBubble: JSQMessagesBubbleImage!
     var outgoingBubble: JSQMessagesBubbleImage!
     var avatars = [String: JSQMessagesAvatarImage]()
-    var messages = [JSQMessage()]
+    var messages = [JSQMessage]()
     
     
     override func viewDidLoad() {
@@ -36,6 +36,13 @@ class JSQViewController: JSQMessagesViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func didPressSendButton(button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: NSDate!) {
+        let message = JSQMessage(senderId: senderId, displayName: senderDisplayName, text: text)
+        messages.append(message)
+        JSQSystemSoundPlayer.jsq_playMessageSentSound()
+        finishSendingMessage()
     }
     
     func createAvatar(senderID:String,senderDisplayName:String, color:UIColor) {
