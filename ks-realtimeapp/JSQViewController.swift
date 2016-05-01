@@ -22,8 +22,9 @@ class JSQViewController: JSQMessagesViewController {
 
         // Do any additional setup after loading the view.
         
-        self.senderId = "uidFromFirebase"
-        self.senderDisplayName = "username"
+        print("id: \(senderId) userName: \(senderDisplayName)")
+        //self.senderId = "uidFromFirebase"
+        //self.senderDisplayName = "username"
         self.inputToolbar.contentView.leftBarButtonItem.hidden = true
         self.inputToolbar.contentView.leftBarButtonItemWidth = 0
         

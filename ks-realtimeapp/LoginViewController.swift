@@ -48,11 +48,31 @@ class LoginViewController: UIViewController {
                     let uid = authData.uid
                     if self.newUser {
                         self.firebase.childByAppendingPath("users").childByAppendingPath(uid).setValue(["isOnline":true, "name":self.username])
+                        self.performSegueWithIdentifier("segueJSQ", sender: self)
                     } else {
                         self.firebase.childByAppendingPath("users").childByAppendingPath(uid).updateChildValues(["isOnline":true])
+                        self.retrieveUserName()
                     }
-                    self.performSegueWithIdentifier("segueJSQ", sender: self)
+                    
                 }
+            }
+        }
+    }
+    
+    func retrieveUserName() {
+        self.firebase.childByAppendingPath("users").childByAppendingPath(firebase.authData.uid).observeSingleEventOfType(FEventType.Value) { (snapshot: FDataSnapshot!) in
+            //print(snapshot)
+            self.username = (snapshot.value as! NSDictionary)["name"] as! String
+            self.performSegueWithIdentifier("segueJSQ", sender: self)
+        }
+        
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "segueJSQ" {
+            if let viewController = segue.destinationViewController as? JSQViewController {
+                viewController.senderId = self.firebase.authData.uid
+                viewController.senderDisplayName = self.username
             }
         }
     }
@@ -106,7 +126,7 @@ class LoginViewController: UIViewController {
         super.viewDidAppear(animated)
         //check if user is logged in
         if firebase.authData != nil {
-            self.performSegueWithIdentifier("segueJSQ", sender: self)
+            retrieveUserName()
         }
     }
     
