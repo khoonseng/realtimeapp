@@ -45,6 +45,10 @@ class JSQViewController: JSQMessagesViewController {
                     self.messages.append(jsqMessage)
                 }
             }
+            
+            self.messages.sortInPlace({ ($0.date.compare($1.date) == NSComparisonResult.OrderedAscending)})
+            
+            
             self.collectionView.reloadData()
         }
         
