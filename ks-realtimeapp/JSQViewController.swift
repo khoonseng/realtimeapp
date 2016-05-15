@@ -39,33 +39,36 @@ class JSQViewController: JSQMessagesViewController {
             
             let values = snapshot.value
             for value in values as! NSDictionary {
-                self.keys.append(value.key as! String)
-                if let message = value.value as? NSDictionary {
-                    let date = message["date"] as! NSTimeInterval
-                    let jsqMessage = JSQMessage(senderId: message["senderId"] as! String, senderDisplayName: message["senderDisplayName"] as! String, date: NSDate(timeIntervalSince1970: date), text: message["message"] as! String)
-                    self.messages.append(jsqMessage)
+                if !self.keys.contains(snapshot.key){ //check if value not equals to current post
+                    self.keys.append(value.key as! String)
+                    if let message = value.value as? NSDictionary {
+                        let date = message["date"] as! NSTimeInterval
+                        let jsqMessage = JSQMessage(senderId: message["senderId"] as! String, senderDisplayName: message["senderDisplayName"] as! String, date: NSDate(timeIntervalSince1970: date), text: message["message"] as! String)
+                        self.messages.append(jsqMessage)
+                    }
                 }
             }
-            
+            //sort ascending
             self.messages.sortInPlace({ ($0.date.compare($1.date) == NSComparisonResult.OrderedAscending)})
-            
-            
             self.collectionView.reloadData()
         }
         
         firebase.queryLimitedToLast(1).observeEventType(FEventType.ChildAdded) { (snapshot:FDataSnapshot!) in
             //print(snapshot)
-            self.keys.append(snapshot.key)
-            if let message = snapshot.value as? NSDictionary {
-                let date = message["date"] as! NSTimeInterval
-                let senderId = message["senderId"] as! String
-                let jsqMessage = JSQMessage(senderId: senderId, senderDisplayName: message["senderDisplayName"] as! String, date: NSDate(timeIntervalSince1970: date), text: message["message"] as! String)
-                self.messages.append(jsqMessage)
-                if senderId != self.senderId {
-                    JSQSystemSoundPlayer.jsq_playMessageReceivedSound()
+            if !self.keys.contains(snapshot.key){                
+                self.keys.append(snapshot.key)
+                if let message = snapshot.value as? NSDictionary {
+                    let date = message["date"] as! NSTimeInterval
+                    let senderId = message["senderId"] as! String
+                    let jsqMessage = JSQMessage(senderId: senderId, senderDisplayName: message["senderDisplayName"] as! String, date: NSDate(timeIntervalSince1970: date), text: message["message"] as! String)
+                    self.messages.append(jsqMessage)
+                    if senderId != self.senderId {
+                        JSQSystemSoundPlayer.jsq_playMessageReceivedSound()
+                    }
                 }
+                
+                self.finishReceivingMessageAnimated(true)
             }
-            self.finishReceivingMessageAnimated(true)
         }
     }
 
