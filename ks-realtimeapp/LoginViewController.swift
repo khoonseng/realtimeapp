@@ -63,6 +63,9 @@ class LoginViewController: UIViewController {
         self.firebase.childByAppendingPath("users").childByAppendingPath(firebase.authData.uid).observeSingleEventOfType(FEventType.Value) { (snapshot: FDataSnapshot!) in
             //print(snapshot)
             self.username = (snapshot.value as! NSDictionary)["name"] as! String
+            //self.id = (snapshot.value as! NSDictionary)["name"] as! String
+            print(self.username)
+            self.firebase.childByAppendingPath("users").childByAppendingPath(self.firebase.authData.uid).updateChildValues(["isOnline":true])
             self.performSegueWithIdentifier("segueJSQ", sender: self)
         }
         
@@ -70,7 +73,9 @@ class LoginViewController: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "segueJSQ" {
+            let uid = self.firebase.authData.uid
             if let viewController = segue.destinationViewController as? JSQViewController {
+                firebase.childByAppendingPath("users").childByAppendingPath(uid).updateChildValues(["isOnline":true])
                 viewController.senderId = self.firebase.authData.uid
                 viewController.senderDisplayName = self.username
             }
