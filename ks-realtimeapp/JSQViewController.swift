@@ -14,7 +14,7 @@ class JSQViewController: JSQMessagesViewController {
     var outgoingBubble: JSQMessagesBubbleImage!
     var avatars = [String: JSQMessagesAvatarImage]()
     var messages = [JSQMessage]()
-    let firebase = Firebase(url: "https://ks-realtimeapp.firebaseio.com/JSQNode")
+    let firebase = Firebase(url: "https://ks-realtimeapp.firebaseio.com")
     var userConnection = Firebase()
     var keys = [String]()
     
@@ -23,7 +23,22 @@ class JSQViewController: JSQMessagesViewController {
 
         // Do any additional setup after loading the view.
         
-        print("id: \(senderId) userName: \(senderDisplayName)")
+        setupCollectUsers()
+        setup()
+        
+    }
+    
+    func setupCollectUsers() {
+        firebase.childByAppendingPath("users").observeSingleEventOfType(FEventType.Value) { (snapshot: FDataSnapshot!) in
+            print("Single -> \(snapshot)")
+        }
+        firebase.childByAppendingPath("users").observeEventType(FEventType.ChildChanged) { (snapshot: FDataSnapshot!) in
+            print("Observer -> \(snapshot)")
+        }
+    }
+    
+    func setup() {
+        //print("id: \(senderId) userName: \(senderDisplayName)")
         
         userConnection = Firebase(url: "https://ks-realtimeapp.firebaseio.com/users/\(senderId)/isOnline")
         userConnection.onDisconnectSetValue("false")
@@ -39,7 +54,7 @@ class JSQViewController: JSQMessagesViewController {
         
         createAvatar(senderId, senderDisplayName: senderDisplayName, color: UIColor.lightGrayColor())
         
-        firebase.queryLimitedToLast(50).observeSingleEventOfType(FEventType.Value) { (snapshot:FDataSnapshot!) in
+        firebase.childByAppendingPath("JSQNode").queryLimitedToLast(50).observeSingleEventOfType(FEventType.Value) { (snapshot:FDataSnapshot!) in
             //print(snapshot)
             
             let values = snapshot.value
@@ -61,9 +76,9 @@ class JSQViewController: JSQMessagesViewController {
             self.collectionView.reloadData()
         }
         
-        firebase.queryLimitedToLast(1).observeEventType(FEventType.ChildAdded) { (snapshot:FDataSnapshot!) in
+        firebase.childByAppendingPath("JSQNode").queryLimitedToLast(1).observeEventType(FEventType.ChildAdded) { (snapshot:FDataSnapshot!) in
             //print(snapshot)
-            if !self.keys.contains(snapshot.key){                
+            if !self.keys.contains(snapshot.key){
                 self.keys.append(snapshot.key)
                 if let message = snapshot.value as? NSDictionary {
                     let date = message["date"] as! NSTimeInterval
@@ -89,7 +104,7 @@ class JSQViewController: JSQMessagesViewController {
     
     override func didPressSendButton(button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: NSDate!) {
         //let message = JSQMessage(senderId: senderId, displayName: senderDisplayName, text: text)
-        firebase.childByAutoId().setValue(["message":text, "senderId": senderId, "senderDisplayName": senderDisplayName, "date":date.timeIntervalSince1970, "messageType":"txt"])
+        firebase.childByAppendingPath("JSQNode").childByAutoId().setValue(["message":text, "senderId": senderId, "senderDisplayName": senderDisplayName, "date":date.timeIntervalSince1970, "messageType":"txt"])
         //messages.append(message)
         JSQSystemSoundPlayer.jsq_playMessageSentSound()
         finishSendingMessage()
