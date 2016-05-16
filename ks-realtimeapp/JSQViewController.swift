@@ -17,6 +17,7 @@ class JSQViewController: JSQMessagesViewController {
     let firebase = Firebase(url: "https://ks-realtimeapp.firebaseio.com")
     var userConnection = Firebase()
     var keys = [String]()
+    var imageToSend: UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -206,5 +207,22 @@ class JSQViewController: JSQMessagesViewController {
 }
 
 extension JSQViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        dismissPicker(picker)
+    }
     
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        if picker.sourceType == UIImagePickerControllerSourceType.Camera || picker.sourceType == UIImagePickerControllerSourceType.PhotoLibrary {
+            imageToSend = image
+            
+            //convert image to string as firebase does not store image
+            
+        }
+        dismissPicker(picker)
+    }
+    
+    func dismissPicker(picker: UIImagePickerController) {
+        picker.dismissViewControllerAnimated(true, completion: nil)
+        picker.delegate = nil
+    }
 }
