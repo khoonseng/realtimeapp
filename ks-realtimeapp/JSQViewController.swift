@@ -213,9 +213,15 @@ extension JSQViewController: UIImagePickerControllerDelegate, UINavigationContro
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         if picker.sourceType == UIImagePickerControllerSourceType.Camera || picker.sourceType == UIImagePickerControllerSourceType.PhotoLibrary {
-            imageToSend = image
+            imageToSend = ImageHelper.resizeImage(image)
             
-            //convert image to string as firebase does not store image
+            /*
+             convert image to string as firebase does not store image
+            
+             Firebase has 10MB size limitation for each field
+             Recommend to use a Content Delivery Network to store images, and store the url in Firebase
+             There is also storage limit on Firebase database
+             */
             
         }
         dismissPicker(picker)

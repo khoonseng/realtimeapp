@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4E2F52161CCA5B0E00662F1E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2F52151CCA5B0E00662F1E /* LoginViewController.swift */; };
+		4E3E037A1CE9C22C008D527E /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3E03791CE9C22C008D527E /* ImageHelper.swift */; };
 		4E59B97B1CCB1144002D035C /* MessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E59B97A1CCB1144002D035C /* MessageTableViewController.swift */; };
 		4E59B97D1CCB231E002D035C /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E59B97C1CCB231E002D035C /* MessageViewController.swift */; };
 		4EADA1D01CCFBD55004ED8DA /* JSQViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EADA1CF1CCFBD55004ED8DA /* JSQViewController.swift */; };
@@ -41,6 +42,7 @@
 		0F39BECA25CAFA4DC54E082F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		4E00E6591CC7C1BC0017CAF3 /* ks-realtimeapp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ks-realtimeapp-Bridging-Header.h"; sourceTree = "<group>"; };
 		4E2F52151CCA5B0E00662F1E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		4E3E03791CE9C22C008D527E /* ImageHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
 		4E59B97A1CCB1144002D035C /* MessageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewController.swift; sourceTree = "<group>"; };
 		4E59B97C1CCB231E002D035C /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		4EADA1CF1CCFBD55004ED8DA /* JSQViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSQViewController.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				4EF8D9401CC29617004AB5AF /* AppDelegate.swift */,
 				4EF8D9441CC29617004AB5AF /* Main.storyboard */,
 				4EADA1CF1CCFBD55004ED8DA /* JSQViewController.swift */,
+				4E3E03791CE9C22C008D527E /* ImageHelper.swift */,
 				4E59B97C1CCB231E002D035C /* MessageViewController.swift */,
 				4E59B97A1CCB1144002D035C /* MessageTableViewController.swift */,
 				4E2F52151CCA5B0E00662F1E /* LoginViewController.swift */,
@@ -347,6 +350,7 @@
 				4E59B97D1CCB231E002D035C /* MessageViewController.swift in Sources */,
 				4EF8D9411CC29617004AB5AF /* AppDelegate.swift in Sources */,
 				4EADA1D01CCFBD55004ED8DA /* JSQViewController.swift in Sources */,
+				4E3E037A1CE9C22C008D527E /* ImageHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
