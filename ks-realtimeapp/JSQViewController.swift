@@ -45,8 +45,10 @@ class JSQViewController: JSQMessagesViewController {
         
         //self.senderId = "uidFromFirebase"
         //self.senderDisplayName = "username"
-        self.inputToolbar.contentView.leftBarButtonItem.hidden = true
-        self.inputToolbar.contentView.leftBarButtonItemWidth = 0
+        
+        //accessory button
+        //self.inputToolbar.contentView.leftBarButtonItem.hidden = true
+        //self.inputToolbar.contentView.leftBarButtonItemWidth = 0
         
         let bubbleFactory = JSQMessagesBubbleImageFactory()
         incomingBubble = bubbleFactory.incomingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleBlueColor())
@@ -159,5 +161,28 @@ class JSQViewController: JSQMessagesViewController {
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return messages.count
+    }
+    
+    //MARK:
+    override func didPressAccessoryButton(sender: UIButton!) {
+        //print("Accessory button pressed")
+        
+        let alertController = UIAlertController(title: "Select Image", message: nil, preferredStyle: .ActionSheet)
+        let cameraAction = UIAlertAction(title: "Camera", style: UIAlertActionStyle.Default) { (alertAction : UIAlertAction) in
+            print("Selected Camera")
+        }
+        let galleryAction = UIAlertAction(title: "Gallery", style: UIAlertActionStyle.Default) { (alertAction : UIAlertAction) in
+            print("Selected Gallery")
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) { (alertAction : UIAlertAction) in
+            print("Selected Cancel")
+        }
+        
+        alertController.addAction(cameraAction)
+        alertController.addAction(galleryAction)
+        alertController.addAction(cancelAction)
+        
+        presentViewController(alertController, animated: true, completion: nil)
+        
     }
 }
