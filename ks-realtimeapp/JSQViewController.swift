@@ -170,9 +170,11 @@ class JSQViewController: JSQMessagesViewController {
         let alertController = UIAlertController(title: "Select Image", message: nil, preferredStyle: .ActionSheet)
         let cameraAction = UIAlertAction(title: "Camera", style: UIAlertActionStyle.Default) { (alertAction : UIAlertAction) in
             print("Selected Camera")
+            self.getImageFrom(.Camera)
         }
         let galleryAction = UIAlertAction(title: "Gallery", style: UIAlertActionStyle.Default) { (alertAction : UIAlertAction) in
             print("Selected Gallery")
+            self.getImageFrom(.PhotoLibrary)
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) { (alertAction : UIAlertAction) in
             print("Selected Cancel")
@@ -185,4 +187,24 @@ class JSQViewController: JSQMessagesViewController {
         presentViewController(alertController, animated: true, completion: nil)
         
     }
+    
+    func getImageFrom(source: UIImagePickerControllerSourceType) { //source is camera or gallery
+        if UIImagePickerController.isSourceTypeAvailable(source) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.modalPresentationStyle = .CurrentContext
+            imagePicker.sourceType = source
+            imagePicker.allowsEditing = false
+            if source == .Camera {
+                imagePicker.cameraDevice = .Rear
+            }
+            self.presentViewController(imagePicker, animated: true, completion: nil)
+        } else {
+            print("The selected source is not available in this device")
+        }
+    }
+}
+
+extension JSQViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
 }
